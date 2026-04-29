@@ -1,0 +1,108 @@
+/* ============================================================
+   LUMINA DESIGN TOKENS
+   Brand variables for Help Center styling.
+   Source of truth for all colors, typography, and spacing.
+   ============================================================ */
+
+:root {
+  /* ----- Core neutrals ----- */
+  --lumina-off-black: #100B07;
+  --lumina-off-white: #FFFFF4;
+
+  /* ----- Brown family ----- */
+  --lumina-brown-2:    #211A14;
+  --lumina-brown-1:    #3F2A16;
+  --lumina-brown:      #4F3D2C;
+
+  /* ----- Gold family ----- */
+  --lumina-gold-1:     #86785B;
+  --lumina-gold:       #B1A072;
+  --lumina-gold-plus:  #D6CFB7;
+
+  /* ----- Gray scale ----- */
+  --lumina-gray-2:    #282320;
+  --lumina-gray-1:    #6B6B66;
+  --lumina-gray:      #8A8A85;
+  --lumina-gray-p1:   #AEAEAB;
+  --lumina-gray-p2:   #D2D2C9;
+  --lumina-gray-p3:   #EAE5DC;
+
+  /* ----- Accents (use sparingly, for state/status) ----- */
+  --lumina-eggplant:    #38273A;
+  --lumina-emerald:     #1B5955;
+  --lumina-rust:        #B86B2D;
+  --lumina-red:         #BA3205;
+  --lumina-yellow:      #D9D248;
+  --lumina-fluro-green: #C7EA26;
+
+  /* ----- Semantic assignments ----- */
+  --bg-page:            var(--lumina-off-white);
+  --bg-elevated:        var(--lumina-off-white);
+  --bg-header:          var(--lumina-off-black);
+  --bg-footer:          var(--lumina-off-black);
+
+  --text-primary:       var(--lumina-off-black);
+  --text-secondary:     var(--lumina-gray-1);
+  --text-muted:         var(--lumina-gray);
+  --text-inverse:       var(--lumina-off-white);
+
+  --accent:             var(--lumina-gold);
+  --accent-hover:       var(--lumina-gold-1);
+  --accent-muted:       var(--lumina-gold-plus);
+
+  --border-subtle:      var(--lumina-gray-p2);
+  --border-default:     var(--lumina-gray-p1);
+
+  --link:               var(--lumina-off-black);
+  --link-hover:         var(--lumina-gold-1);
+
+  --status-info:        var(--lumina-emerald);
+  --status-warn:        var(--lumina-rust);
+  --status-error:       var(--lumina-red);
+
+  /* ----- Typography ----- */
+  --font-display:  "Editorial New", "Times New Roman", Georgia, serif;
+  --font-sans:     "Neue Montreal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono:     "DM Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  --fs-xs:    0.75rem;
+  --fs-sm:    0.875rem;
+  --fs-base:  1rem;
+  --fs-md:    1.125rem;
+  --fs-lg:    1.375rem;
+  --fs-xl:    1.75rem;
+  --fs-2xl:   2.25rem;
+  --fs-3xl:   3rem;
+
+  --lh-tight: 1.15;
+  --lh-snug:  1.35;
+  --lh-base:  1.55;
+
+  --tracking-tight:  -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+
+  /* ----- Spacing scale ----- */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* ----- Layout ----- */
+  --content-width: 760px;
+  --site-width:    1200px;
+
+  /* ----- Borders & radius ----- */
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --radius-md:   4px;
+
+  /* ----- Motion ----- */
+  --ease:        cubic-bezier(0.2, 0.6, 0.2, 1);
+  --duration:    160ms;
+}
