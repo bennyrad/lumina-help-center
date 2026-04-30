@@ -155,9 +155,8 @@
    1. RESET & BASE
    ============================================================ */
 
-body,
-.docs-frame {
-  background-color: var(--bg-page);
+body {
+  background: var(--bg-page);
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: var(--fs-base);
