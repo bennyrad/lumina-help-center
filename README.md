@@ -101,10 +101,5 @@ Voice compliance: every article must conform to `docs/voice-and-tone.md`. The re
 
 ---
 
-## Owners
-
-Help Center program: Benny Rad (bennyrad)
-Brand and design: Shannon
-Engineering review: Brian
 
 

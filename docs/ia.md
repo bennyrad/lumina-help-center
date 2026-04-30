@@ -62,7 +62,7 @@ Collaborate, Projects, Opportunities, Deals, Milestones, Guests.
 
 Sources: COLLABORATE & PROJECTS (9), PROJECTS (1), GUESTS (1).
 
-Note: nine entries in COLLABORATE & PROJECTS are currently "Not published" in the spreadsheet. Confirm with Brian which to migrate as drafts vs hold entirely.
+Note: nine entries in COLLABORATE & PROJECTS are currently "Not published" in the spreadsheet. 
 
 ### 8. Payments
 
@@ -70,7 +70,7 @@ Payments, payouts, fees, taxes, receipts, cancellations, refunds, disputes.
 
 Sources: PAYMENTS, PAYOUTS, AND FEES (5), TAX/RECEIPTS (1), CANCELLATIONS, REFUNDS, AND DISPUTES (3).
 
-Note: all entries currently "Not published." Confirm scope with Brian.
+Note: all entries currently "Not published." 
 
 ### 9. Mobile
 
@@ -98,7 +98,7 @@ Sources: SUPPORT (5), ACCESSIBILITY & SYSTEM REQUIREMENTS (1), BROWSER SUPPORT (
 All entries marked Published (59) or Review (15) in the spreadsheet, plus the canonical Discussions entries to be authored.
 
 **Tier 2 — follow-up.**
-The 29 Not published entries, primarily in COLLABORATE & PROJECTS and PAYMENTS. Confirm with Brian which to migrate as drafts.
+The 29 Not published entries, primarily in COLLABORATE & PROJECTS and PAYMENTS. 
 
 **Tier 3 — drop.**
 The 10 Skip and 9 Draft entries in the spreadsheet are out of scope for migration unless flagged otherwise.
