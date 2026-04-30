@@ -1,14 +1,24 @@
 /* ============================================================
    LUMINA HELP CENTER STYLES
    Overrides Help Scout Docs default theme to match Lumina brand.
+   Selectors target the actual rendered DOM (Bootstrap 2-era markup:
+   #mainNav, #docsSearch, #fullArticle, #sidebar, .category-list,
+   .articleList, .most-pop-articles, .articleRatings, etc.).
+
+   Cascade context: Help Scout injects a per-tenant inline <style>
+   block between its launch CSS and ours that sets a gray body bg
+   and a rust (#b86b2d) link color via compound selectors like
+   `.contentWrapper a` and `.category-list .category .article-count`.
+   We override by matching specificity and relying on source order
+   (this file loads last). !important is reserved for cases where
+   Help Scout uses an !important itself.
+
    Companion: tokens.css
    ============================================================ */
 
-/* Tokens imported via separate <link> or inlined here.
-   If hosting both files separately, ensure tokens.css loads first. */
 @import url("./tokens.css");
 
-/* ----- Web fonts (self-hosted) ----- */
+/* ----- Web fonts (self-hosted; future workstream — files not yet committed) ----- */
 @font-face {
   font-family: "Editorial New";
   src: url("../assets/fonts/EditorialNew-Regular.woff2") format("woff2");
@@ -61,240 +71,483 @@ a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  transition: color var(--duration) var(--ease);
+  transition: color var(--duration) var(--ease),
+              text-decoration-color var(--duration) var(--ease);
 }
 
 a:hover {
   color: var(--link-hover);
+  text-decoration-color: var(--accent);
 }
 
 /* ============================================================
-   2. HEADER
+   2. TOP NAV (#mainNav.navbar)
    ============================================================ */
 
-#header,
-.docs-header {
-  background-color: var(--bg-header) !important;
-  color: var(--text-inverse);
-  padding: var(--space-8) 0;
-  border-bottom: none;
+#mainNav.navbar {
+  background: var(--bg-header);
+  border: none;
+  margin: 0;
 }
 
-#header a,
-.docs-header a {
-  color: var(--text-inverse);
+#mainNav .navbar-inner {
+  background: var(--bg-header);
+  border: none;
+  box-shadow: none;
+  padding: var(--space-4) 0;
 }
 
-#header a:hover,
-.docs-header a:hover {
+#mainNav .container-fluid {
+  max-width: var(--site-width);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#mainNav .brand {
+  padding: 0;
+  margin: 0;
+}
+
+#mainNav .brand img {
+  display: block;
+  max-height: 40px;
+  width: auto;
+}
+
+#mainNav .nav-collapse {
+  margin: 0;
+}
+
+#mainNav ul.nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--space-6);
+}
+
+#mainNav ul.nav > li {
+  margin: 0;
+}
+
+#mainNav ul.nav li a {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-inverse);
+  padding: var(--space-2) 0;
+}
+
+#mainNav ul.nav li a:hover,
+#mainNav ul.nav li a:focus {
   color: var(--accent);
 }
 
-/* Site nav links */
-.docs-header .site-nav,
-#header .site-nav {
-  font-family: var(--font-mono);
-  font-size: var(--fs-sm);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
+/* Mobile nav toggle. Hidden by default; Bootstrap shows it on small screens. */
+#mainNav .btn.btn-navbar {
+  background: transparent;
+  border: 1px solid var(--lumina-gray-1);
+  box-shadow: none;
+  padding: var(--space-2) var(--space-3);
 }
 
-.docs-header .site-nav a,
-#header .site-nav a {
-  text-decoration: none;
-  margin-left: var(--space-8);
-}
-
-/* Logo container */
-#header .logo,
-.docs-header .logo {
-  max-height: 48px;
+#mainNav .btn.btn-navbar .icon-bar {
+  background: var(--text-inverse);
+  box-shadow: none;
 }
 
 /* ============================================================
-   3. HERO / SEARCH
+   3. HOMEPAGE HERO + SEARCH (#docsSearch, #searchBar)
    ============================================================ */
 
-.hero,
-#docsSearch,
-.docs-search {
-  background-color: var(--bg-page);
-  padding: var(--space-24) var(--space-6);
+#docsSearch {
+  background: var(--bg-page);
+  padding: var(--space-24) var(--space-6) var(--space-16);
   text-align: center;
 }
 
-.hero h1,
-.docs-search h1 {
+#docsSearch h1 {
   font-family: var(--font-display);
   font-size: var(--fs-3xl);
   font-weight: 400;
   line-height: var(--lh-tight);
   letter-spacing: var(--tracking-tight);
   color: var(--text-primary);
-  margin: 0 0 var(--space-12);
   max-width: var(--content-width);
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto var(--space-12);
 }
 
-/* Search input */
-.search input[type="text"],
-#docsSearch input[type="text"],
-input.search-input {
-  font-family: var(--font-sans);
-  font-size: var(--fs-md);
-  padding: var(--space-4) var(--space-6);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-none);
-  background-color: var(--bg-elevated);
-  color: var(--text-primary);
-  width: 100%;
+#searchBar {
+  display: flex;
+  align-items: stretch;
   max-width: 640px;
-  outline: none;
+  margin: 0 auto;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
   transition: border-color var(--duration) var(--ease);
 }
 
-.search input[type="text"]:focus,
-#docsSearch input[type="text"]:focus {
+#searchBar:focus-within {
   border-color: var(--lumina-off-black);
 }
 
-.search input[type="text"]::placeholder,
-#docsSearch input[type="text"]::placeholder {
+#searchBar input.search-query {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  outline: none;
+  margin: 0;
+  box-shadow: none;
+}
+
+#searchBar input.search-query::placeholder {
   color: var(--text-muted);
 }
 
-/* Search button */
-.search button,
-#docsSearch button,
-.btn-search {
-  background-color: var(--lumina-off-black);
+#searchBar button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--lumina-off-black);
   color: var(--text-inverse);
   font-family: var(--font-mono);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  padding: var(--space-4) var(--space-8);
+  padding: 0 var(--space-6);
   border: none;
-  border-radius: var(--radius-none);
   cursor: pointer;
   transition: background-color var(--duration) var(--ease);
 }
 
-.search button:hover,
-#docsSearch button:hover {
-  background-color: var(--lumina-brown-2);
+#searchBar button[type="submit"]:hover {
+  background: var(--lumina-brown-2);
+}
+
+#searchBar button[type="submit"] .icon-search {
+  color: currentColor;
+}
+
+/* Sidebar variant: compact, no submit button label text. */
+#sidebar #searchBar.sm {
+  max-width: none;
+  margin: 0 0 var(--space-8);
+}
+
+#sidebar #searchBar.sm input.search-query {
+  font-size: var(--fs-sm);
+  padding: var(--space-2) var(--space-3);
+}
+
+#sidebar #searchBar.sm button[type="submit"] {
+  padding: 0 var(--space-3);
+}
+
+/* Search results dropdown. Keep restrained — Help Scout's JS positions it. */
+#serp-dd {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  font-size: var(--fs-sm);
+}
+
+#serp-dd .result li {
+  padding: var(--space-2) var(--space-3);
 }
 
 /* ============================================================
-   4. COLLECTION CARDS (homepage)
+   4. HOMEPAGE: MOST POPULAR (.most-pop-articles)
    ============================================================ */
 
-.docs-categories,
-.collections-list {
-  background-color: var(--bg-page);
+.most-pop-articles {
+  max-width: var(--site-width);
+  margin: 0 auto;
   padding: var(--space-12) var(--space-6);
 }
 
-.category,
-.collection-card {
-  background-color: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-none);
-  padding: var(--space-8);
-  transition: border-color var(--duration) var(--ease);
+.most-pop-articles h2 {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-6);
 }
 
-.category:hover,
-.collection-card:hover {
-  border-color: var(--lumina-off-black);
+.most-pop-articles ul.popArticles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: var(--space-12);
 }
 
-.category h2,
-.category h3,
-.collection-card h2,
-.collection-card h3 {
+.popArticles li {
+  margin: 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* No top border on the visual top row of the grid (first two items). */
+.popArticles li:nth-child(-n+2) {
+  border-top: none;
+}
+
+.popArticles li a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: var(--fs-base);
+}
+
+/* Override the inline-style rust color (.most-pop-articles .popArticles a). */
+.most-pop-articles .popArticles a {
+  color: var(--text-primary);
+}
+
+.most-pop-articles .popArticles a:hover {
+  color: var(--link-hover);
+}
+
+.popArticles li a .icon-article-doc {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.popArticles li a:hover .icon-article-doc {
+  color: var(--accent);
+}
+
+.most-pop-articles .popArticles a:hover span {
+  color: var(--link-hover);
+}
+
+/* ============================================================
+   5. HOMEPAGE: SECTION SEPARATOR
+   ============================================================ */
+
+hr.sep {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  max-width: var(--site-width);
+  margin: 0 auto;
+}
+
+/* ============================================================
+   6. HOMEPAGE: CATEGORY LIST (.category-list, a.category)
+   ============================================================ */
+
+.category-list {
+  max-width: var(--site-width);
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-6) var(--space-24);
+  display: block;
+}
+
+.category-list a.category {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--border-subtle);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: color var(--duration) var(--ease);
+}
+
+.category-list a.category:first-of-type {
+  border-top: none;
+}
+
+.category-list a.category:last-of-type {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.category-list a.category h3 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
   font-weight: 400;
   line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
   color: var(--text-primary);
-  margin: 0 0 var(--space-4);
-}
-
-.category .category-description,
-.collection-card .description {
-  font-family: var(--font-sans);
-  font-size: var(--fs-sm);
-  color: var(--text-secondary);
-  line-height: var(--lh-base);
-  margin: 0 0 var(--space-6);
-}
-
-/* Article links inside collection card */
-.category ul,
-.collection-card ul {
-  list-style: none;
-  padding: 0;
   margin: 0;
 }
 
-.category ul li,
-.collection-card ul li {
-  border-top: 1px solid var(--border-subtle);
-  padding: var(--space-3) 0;
+.category-list a.category:hover h3 {
+  color: var(--link-hover);
 }
 
-.category ul li:first-child,
-.collection-card ul li:first-child {
-  border-top: none;
+.category-list a.category .article-count {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+  white-space: nowrap;
 }
 
-.category ul li a,
-.collection-card ul li a {
-  text-decoration: none;
-  color: var(--text-primary);
-  font-size: var(--fs-base);
-}
-
-.category ul li a:hover,
-.collection-card ul li a:hover {
-  color: var(--accent-hover);
-}
-
-/* Hide the lock icon if used; replace with text treatment */
-.category .icon-lock,
-.collection-card .lock-icon {
-  display: none;
+/* Override the inline-style rust on .category-list .category .article-count. */
+.category-list .category .article-count,
+.category-list .category:hover .article-count {
+  color: var(--text-muted);
 }
 
 /* ============================================================
-   5. ARTICLE PAGES
+   7. CONTENT SHELL (#contentArea, .row-fluid, #main-content)
    ============================================================ */
 
-.article,
-.docs-article,
-#fullArticle {
-  max-width: var(--content-width);
+#contentArea.container-fluid {
+  max-width: var(--site-width);
   margin: 0 auto;
-  padding: var(--space-12) var(--space-6) var(--space-24);
-  background-color: var(--bg-page);
+  padding: 0 var(--space-6);
 }
 
-.article h1,
-.docs-article h1,
-#fullArticle h1 {
+#contentArea > .row-fluid {
+  padding: var(--space-12) 0;
+}
+
+#main-content.span9 {
+  /* Bootstrap 2 sets the column width. We add padding so content
+     breathes from the sand rail edge. */
+  padding-right: var(--space-8);
+}
+
+/* ============================================================
+   8. CATEGORY PAGE (#categoryHead, .articleList)
+   ============================================================ */
+
+hgroup#categoryHead {
+  margin: 0 0 var(--space-12);
+  padding: 0 0 var(--space-6);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+#categoryHead h1 {
   font-family: var(--font-display);
   font-size: var(--fs-2xl);
   font-weight: 400;
   line-height: var(--lh-tight);
   letter-spacing: var(--tracking-tight);
   color: var(--text-primary);
-  margin: 0 0 var(--space-6);
+  margin: 0;
 }
 
-.article h2,
-.docs-article h2 {
+#categoryHead p.descrip {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  color: var(--text-secondary);
+  margin: 0;
+  flex: 1;
+}
+
+#categoryHead p.descrip:empty {
+  display: none;
+}
+
+#categoryHead .sort {
+  margin: 0;
+}
+
+#categoryHead select#sortBy {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0;
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+}
+
+ul.articleList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.articleList li {
+  margin: 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.articleList li:first-child {
+  border-top: none;
+}
+
+.articleList li:last-child {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.articleList li a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: var(--fs-base);
+}
+
+.articleList li a:hover {
+  color: var(--link-hover);
+}
+
+.articleList li a .icon-article-doc {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.articleList li a:hover .icon-article-doc {
+  color: var(--accent);
+}
+
+/* ============================================================
+   9. ARTICLE PAGE (#fullArticle, .articleRatings, .articleFoot, .related)
+   ============================================================ */
+
+.contentWrapper {
+  max-width: var(--content-width);
+}
+
+article#fullArticle {
+  position: relative;
+  padding: 0;
+  background: transparent;
+}
+
+#fullArticle h1.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 400;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-8);
+  padding-right: var(--space-12); /* Leave room for .printArticle button */
+}
+
+#fullArticle h2 {
   font-family: var(--font-sans);
   font-size: var(--fs-lg);
   font-weight: 500;
@@ -303,8 +556,7 @@ input.search-input {
   margin: var(--space-12) 0 var(--space-4);
 }
 
-.article h3,
-.docs-article h3 {
+#fullArticle h3 {
   font-family: var(--font-sans);
   font-size: var(--fs-md);
   font-weight: 500;
@@ -313,30 +565,25 @@ input.search-input {
   margin: var(--space-8) 0 var(--space-3);
 }
 
-.article p,
-.docs-article p {
+#fullArticle p {
   font-size: var(--fs-base);
   line-height: var(--lh-base);
   color: var(--text-primary);
   margin: 0 0 var(--space-4);
 }
 
-.article ul,
-.article ol,
-.docs-article ul,
-.docs-article ol {
+#fullArticle ul,
+#fullArticle ol {
   margin: 0 0 var(--space-4);
   padding-left: var(--space-6);
 }
 
-.article li,
-.docs-article li {
+#fullArticle li {
   margin-bottom: var(--space-2);
   line-height: var(--lh-base);
 }
 
-.article blockquote,
-.docs-article blockquote {
+#fullArticle blockquote {
   border-left: 2px solid var(--accent);
   padding: var(--space-2) 0 var(--space-2) var(--space-6);
   margin: var(--space-6) 0;
@@ -344,19 +591,17 @@ input.search-input {
   color: var(--text-secondary);
 }
 
-.article code,
-.docs-article code {
+#fullArticle code {
   font-family: var(--font-mono);
   font-size: 0.9em;
-  background-color: var(--lumina-gray-p3);
+  background: var(--lumina-gray-p3);
   color: var(--text-primary);
   padding: 0.1em 0.35em;
   border-radius: var(--radius-sm);
 }
 
-.article pre,
-.docs-article pre {
-  background-color: var(--lumina-gray-2);
+#fullArticle pre {
+  background: var(--lumina-gray-2);
   color: var(--text-inverse);
   padding: var(--space-4);
   overflow-x: auto;
@@ -364,161 +609,288 @@ input.search-input {
   font-size: var(--fs-sm);
   line-height: var(--lh-snug);
   border-radius: var(--radius-sm);
+  margin: var(--space-6) 0;
 }
 
-.article hr,
-.docs-article hr {
+#fullArticle hr {
   border: none;
   border-top: 1px solid var(--border-subtle);
   margin: var(--space-12) 0;
 }
 
-/* Last updated, byline, meta */
-.article-meta,
-.docs-article-meta,
-.last-updated {
+/* Override the inline-style rust on .contentWrapper a / #fullArticle a. */
+.contentWrapper a,
+#fullArticle a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.contentWrapper a:hover,
+#fullArticle a:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--accent);
+}
+
+/* Print button: top-right of article. */
+.printArticle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: var(--fs-md);
+  padding: var(--space-2);
+}
+
+.printArticle:hover {
+  color: var(--text-primary);
+}
+
+/* Article ratings widget. */
+.articleRatings {
+  margin: var(--space-12) 0;
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.articleRatings-question {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.articleRatings-actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.articleRatings .rateAction {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color var(--duration) var(--ease),
+              border-color var(--duration) var(--ease);
+}
+
+.articleRatings .rateAction:hover {
+  color: var(--text-primary);
+  border-color: var(--lumina-off-black);
+}
+
+.articleRatings .rateAction svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.articleRatings-feedback,
+.articleRatings-failure {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+/* Article foot ("Still need help?" + last updated). */
+section.articleFoot {
+  margin: var(--space-8) 0 0;
+  padding: var(--space-6) 0 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  color: var(--text-secondary);
+}
+
+.articleFoot .icon-contact {
+  color: var(--text-muted);
+}
+
+.articleFoot p.help {
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+.articleFoot time.lu {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: var(--space-8);
+  margin-left: auto;
 }
 
-/* ============================================================
-   6. SIDEBAR / TOC
-   ============================================================ */
-
-.sidebar,
-.docs-sidebar,
-#sidebar {
-  background-color: var(--bg-page);
-  border-right: 1px solid var(--border-subtle);
-  padding: var(--space-8) var(--space-6);
-  font-size: var(--fs-sm);
+/* Related articles section. */
+section.related {
+  max-width: var(--content-width);
+  margin: var(--space-16) 0 0;
+  padding: var(--space-8) 0 0;
+  border-top: 1px solid var(--border-subtle);
 }
 
-.sidebar h3,
-.sidebar .nav-heading {
+section.related h3 {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   font-weight: 400;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--text-muted);
-  margin: 0 0 var(--space-3);
+  margin: 0 0 var(--space-4);
 }
 
-.sidebar ul {
+section.related ul {
   list-style: none;
-  padding: 0;
-  margin: 0 0 var(--space-8);
-}
-
-.sidebar li {
   margin: 0;
+  padding: 0;
 }
 
-.sidebar li a {
-  display: block;
-  padding: var(--space-2) 0;
+section.related li {
+  margin: 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+section.related li:first-child {
+  border-top: none;
+}
+
+section.related li a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
   color: var(--text-primary);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-
-.sidebar li a:hover,
-.sidebar li.active a {
-  color: var(--accent-hover);
-}
-
-/* ============================================================
-   7. CONTACT FORM (Beacon-adjacent embedded form)
-   ============================================================ */
-
-.contact-form,
-form.docs-contact {
-  max-width: var(--content-width);
-  margin: 0 auto;
-  padding: var(--space-12) var(--space-6);
-}
-
-.contact-form label,
-form.docs-contact label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  display: block;
-  margin: var(--space-6) 0 var(--space-2);
-}
-
-.contact-form input,
-.contact-form select,
-.contact-form textarea,
-form.docs-contact input,
-form.docs-contact select,
-form.docs-contact textarea {
-  width: 100%;
-  font-family: var(--font-sans);
   font-size: var(--fs-base);
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-none);
-  background-color: var(--bg-elevated);
-  color: var(--text-primary);
 }
 
-.contact-form button[type="submit"],
-form.docs-contact button[type="submit"] {
-  background-color: var(--lumina-off-black);
-  color: var(--text-inverse);
-  font-family: var(--font-mono);
-  font-size: var(--fs-sm);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  padding: var(--space-4) var(--space-8);
-  border: none;
-  cursor: pointer;
-  margin-top: var(--space-6);
+section.related li a:hover {
+  color: var(--link-hover);
 }
 
-/* ============================================================
-   8. FOOTER
-   ============================================================ */
-
-#footer,
-.docs-footer {
-  background-color: var(--bg-footer);
-  color: var(--text-inverse);
-  padding: var(--space-12) var(--space-6);
-  margin-top: var(--space-24);
-  text-align: center;
+section.related li a .icon-article-doc {
+  color: var(--text-muted);
+  flex-shrink: 0;
 }
 
-#footer p,
-.docs-footer p {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--lumina-gray-p1);
-  margin: 0;
-}
-
-#footer a,
-.docs-footer a {
-  color: var(--lumina-gray-p1);
-}
-
-#footer a:hover,
-.docs-footer a:hover {
+section.related li a:hover .icon-article-doc {
   color: var(--accent);
 }
 
 /* ============================================================
-   9. UTILITIES
+   10. SIDEBAR / SAND RAIL (#sidebar)
+   ============================================================ */
+
+aside#sidebar {
+  background: var(--bg-rail);
+  border-left: 1px solid var(--border-subtle);
+  padding: var(--space-8) var(--space-6);
+  font-size: var(--fs-sm);
+}
+
+#sidebar h3 {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-4);
+}
+
+#sidebar ul.nav.nav-list {
+  list-style: none;
+  margin: 0 0 var(--space-8);
+  padding: 0;
+}
+
+#sidebar ul.nav.nav-list li {
+  margin: 0;
+}
+
+#sidebar ul.nav.nav-list li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-3);
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--duration) var(--ease),
+              color var(--duration) var(--ease);
+}
+
+#sidebar ul.nav.nav-list li a:hover {
+  background: var(--lumina-gray-p3);
+  color: var(--text-primary);
+}
+
+#sidebar ul.nav.nav-list li.active a {
+  background: var(--accent-muted);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+#sidebar ul.nav.nav-list li a .icon-arrow {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  font-size: var(--fs-xs);
+}
+
+#sidebar ul.nav.nav-list li.active a .icon-arrow {
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   11. FOOTER (#contentArea > footer)
+   ============================================================ */
+
+#contentArea > footer {
+  background: var(--bg-footer);
+  color: var(--text-inverse);
+  padding: var(--space-8) var(--space-6);
+  margin: var(--space-24) calc(-1 * var(--space-6)) 0;
+  text-align: center;
+}
+
+#contentArea > footer p {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--lumina-gray-p1);
+  margin: 0;
+}
+
+#contentArea > footer a {
+  color: var(--lumina-gray-p1);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+#contentArea > footer a:hover {
+  color: var(--accent);
+}
+
+/* ============================================================
+   12. UTILITIES
    ============================================================ */
 
 .mono {
@@ -534,28 +906,97 @@ form.docs-contact button[type="submit"] {
   color: var(--text-muted);
 }
 
+#noResults {
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  padding: var(--space-6);
+  text-align: center;
+}
+
 /* ============================================================
-   10. RESPONSIVE
+   13. RESPONSIVE
    ============================================================ */
 
 @media (max-width: 768px) {
-  .hero h1,
-  .docs-search h1 {
+  #docsSearch {
+    padding: var(--space-16) var(--space-4) var(--space-12);
+  }
+
+  #docsSearch h1 {
     font-size: var(--fs-2xl);
   }
 
-  .article h1,
-  .docs-article h1 {
+  #fullArticle h1.title {
+    font-size: var(--fs-xl);
+    padding-right: 0;
+  }
+
+  .printArticle {
+    position: static;
+    display: inline-block;
+    margin-bottom: var(--space-4);
+  }
+
+  .most-pop-articles ul.popArticles {
+    grid-template-columns: 1fr;
+  }
+
+  .popArticles li:nth-child(-n+2) {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .popArticles li:first-child {
+    border-top: none;
+  }
+
+  .category-list a.category {
+    padding: var(--space-6) 0;
+  }
+
+  .category-list a.category h3 {
+    font-size: var(--fs-lg);
+  }
+
+  /* On narrow screens Bootstrap stacks .span9/.span3 vertically.
+     Drop the sand rail's left border so the seam disappears, and
+     give it more vertical breathing room. */
+  aside#sidebar {
+    border-left: none;
+    border-top: 1px solid var(--border-subtle);
+    padding: var(--space-8) var(--space-4);
+  }
+
+  #main-content.span9 {
+    padding-right: 0;
+  }
+
+  hgroup#categoryHead {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .articleRatings {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .articleFoot time.lu {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 375px) {
+  #mainNav .container-fluid {
+    padding: 0 var(--space-4);
+  }
+
+  #docsSearch h1 {
     font-size: var(--fs-xl);
   }
 
-  .docs-categories,
-  .collections-list {
-    padding: var(--space-6);
-  }
-
-  .category,
-  .collection-card {
-    padding: var(--space-6);
+  #searchBar button[type="submit"] span {
+    /* Collapse to icon-only on tightest widths. */
+    display: none;
   }
 }
