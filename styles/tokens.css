@@ -38,6 +38,7 @@
   /* ----- Semantic assignments ----- */
   --bg-page:            var(--lumina-off-white);
   --bg-elevated:        var(--lumina-off-white);
+  --bg-rail:            #FBFBF7;
   --bg-header:          var(--lumina-off-black);
   --bg-footer:          var(--lumina-off-black);
 
