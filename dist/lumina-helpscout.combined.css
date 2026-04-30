@@ -39,8 +39,8 @@
   --lumina-fluro-green: #C7EA26;
 
   /* ----- Semantic assignments ----- */
-  --bg-page:            var(--lumina-off-white);
-  --bg-elevated:        var(--lumina-off-white);
+  --bg-page:            #FFFFFF;
+  --bg-elevated:        #FFFFFF;
   --bg-rail:            #FBFBF7;
   --bg-header:          var(--lumina-off-black);
   --bg-footer:          var(--lumina-off-black);
@@ -214,12 +214,22 @@ a:hover {
   padding: 0 var(--space-6);
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
+/* Push everything that follows the brand to the right edge.
+   More robust than space-between, which behaves unpredictably
+   with the nav-collapse element Bootstrap may leave in the flow. */
 #mainNav .brand {
   padding: 0;
-  margin: 0;
+  margin: 0 auto 0 0;
+}
+
+/* Bootstrap shows .btn-navbar on small screens via @media; pin it
+   to display:none on desktop so it can never be a flex item there. */
+@media (min-width: 769px) {
+  #mainNav .btn.btn-navbar {
+    display: none;
+  }
 }
 
 #mainNav .brand img {
@@ -464,7 +474,10 @@ hr.sep {
   max-width: var(--site-width);
   margin: 0 auto;
   padding: var(--space-12) var(--space-6) var(--space-24);
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: var(--space-12);
+  row-gap: 0;
 }
 
 .category-list a.category {
@@ -479,12 +492,9 @@ hr.sep {
   transition: color var(--duration) var(--ease);
 }
 
-.category-list a.category:first-of-type {
+/* No top border on the visual top row of the grid (first two items). */
+.category-list a.category:nth-child(-n+2) {
   border-top: none;
-}
-
-.category-list a.category:last-of-type {
-  border-bottom: 1px solid var(--border-subtle);
 }
 
 .category-list a.category h3 {
@@ -527,14 +537,31 @@ hr.sep {
   padding: 0 var(--space-6);
 }
 
+/* Override Bootstrap 2's float-based row to flex, so the sand rail
+   stretches to full content height. row-reverse puts the sidebar
+   (DOM-second) on the visual left, matching the design reference. */
 #contentArea > .row-fluid {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: stretch;
+  gap: var(--space-12);
   padding: var(--space-12) 0;
 }
 
-#main-content.span9 {
-  /* Bootstrap 2 sets the column width. We add padding so content
-     breathes from the sand rail edge. */
-  padding-right: var(--space-8);
+#contentArea > .row-fluid > [class*="span"] {
+  float: none;
+  width: auto;
+  margin-left: 0;
+  min-height: 0;
+}
+
+#contentArea > .row-fluid > #main-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+#contentArea > .row-fluid > aside#sidebar {
+  flex: 0 0 240px;
 }
 
 /* ============================================================
@@ -784,31 +811,29 @@ article#fullArticle {
   gap: var(--space-3);
 }
 
+/* The smiley SVG paths only contain eyes + smile — the face circle
+   is the button's background. So the button needs a solid fill,
+   not transparent, or the icon reads as floating shapes. */
 .articleRatings .rateAction {
-  background: transparent;
+  background: var(--bg-rail);
   border: 1px solid var(--border-subtle);
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  box-shadow: none;
   color: var(--text-secondary);
-  transition: color var(--duration) var(--ease),
-              border-color var(--duration) var(--ease);
+  transition: background-color var(--duration) var(--ease),
+              border-color var(--duration) var(--ease),
+              color var(--duration) var(--ease),
+              transform var(--duration) var(--ease);
 }
 
-.articleRatings .rateAction:hover {
-  color: var(--text-primary);
+.articleRatings .rateAction:hover,
+.articleRatings .rateAction:focus {
+  background: var(--accent-muted);
   border-color: var(--lumina-off-black);
-}
-
-.articleRatings .rateAction svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
+  color: var(--text-primary);
+  box-shadow: none;
+  outline: 0;
+  transform: none;
 }
 
 .articleRatings-feedback,
@@ -909,7 +934,6 @@ section.related li a:hover .icon-article-doc {
 
 aside#sidebar {
   background: var(--bg-rail);
-  border-left: 1px solid var(--border-subtle);
   padding: var(--space-8) var(--space-6);
   font-size: var(--fs-sm);
 }
@@ -1060,6 +1084,19 @@ aside#sidebar {
     border-top: none;
   }
 
+  .category-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* Single column: every item except the first needs a top border. */
+  .category-list a.category:nth-child(-n+2) {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .category-list a.category:first-child {
+    border-top: none;
+  }
+
   .category-list a.category {
     padding: var(--space-6) 0;
   }
@@ -1068,17 +1105,22 @@ aside#sidebar {
     font-size: var(--fs-lg);
   }
 
-  /* On narrow screens Bootstrap stacks .span9/.span3 vertically.
-     Drop the sand rail's left border so the seam disappears, and
-     give it more vertical breathing room. */
-  aside#sidebar {
-    border-left: none;
-    border-top: 1px solid var(--border-subtle);
-    padding: var(--space-8) var(--space-4);
+  /* Stack main-content over sidebar at narrow widths. Default
+     flex-direction (column) follows DOM order, so main-content
+     comes first, sidebar drops below — opposite of desktop. */
+  #contentArea > .row-fluid {
+    flex-direction: column;
+    gap: 0;
   }
 
-  #main-content.span9 {
-    padding-right: 0;
+  #contentArea > .row-fluid > #main-content,
+  #contentArea > .row-fluid > aside#sidebar {
+    flex: 1 1 auto;
+  }
+
+  aside#sidebar {
+    padding: var(--space-8) var(--space-4);
+    margin-top: var(--space-8);
   }
 
   hgroup#categoryHead {
