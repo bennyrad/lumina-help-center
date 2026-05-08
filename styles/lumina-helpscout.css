@@ -6,8 +6,8 @@
    - Keep Help Scout's default structure and module layouts intact.
    - Apply only the baseline Lumina surface, link, header, logo, and
      article reading styles.
-   - Defer homepage cards, search, sidebar, footer, article ratings,
-     related articles, fonts, and custom JavaScript until their own pass.
+   - Defer homepage cards, sidebar, footer, article ratings, related
+     articles, fonts, and custom JavaScript until their own pass.
 
    Companion: tokens.css
    ============================================================ */
@@ -125,7 +125,70 @@ a:focus {
 }
 
 /* ============================================================
-   3. ARTICLE READABILITY
+   3. HOMEPAGE SEARCH COLORS
+   ============================================================ */
+
+/* Homepage search region. Color-only pass; keep Help Scout spacing/layout. */
+#docsSearch {
+  background: var(--bg-page);
+  color: var(--text-primary);
+}
+
+#docsSearch h1 {
+  color: var(--text-primary);
+}
+
+/* Homepage and sidebar search fields. */
+#searchBar input.search-query {
+  background-color: var(--bg-elevated);
+  border-color: var(--border-default);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+#searchBar input.search-query::placeholder {
+  color: var(--text-muted);
+}
+
+#searchBar input.search-query:focus {
+  border-color: var(--text-primary);
+  box-shadow: none;
+}
+
+/* Search submit button. */
+#searchBar button[type="submit"] {
+  background: var(--bg-header);
+  border-color: var(--bg-header);
+  color: var(--text-inverse);
+  text-shadow: none;
+  box-shadow: none;
+}
+
+#searchBar button[type="submit"]:hover,
+#searchBar button[type="submit"]:focus {
+  background: var(--lumina-brown-2);
+  border-color: var(--lumina-brown-2);
+  color: var(--text-inverse);
+  box-shadow: none;
+}
+
+#searchBar button[type="submit"] .icon-search {
+  color: currentColor;
+}
+
+/* Search autocomplete dropdown. */
+#serp-dd {
+  background: var(--bg-elevated);
+  border-color: var(--border-default);
+  color: var(--text-primary);
+}
+
+#serp-dd .result a {
+  color: var(--link);
+}
+
+/* ============================================================
+   4. ARTICLE READABILITY
    ============================================================ */
 
 /* Article text colors. Matches Help Scout's inline article selector group. */
@@ -185,7 +248,7 @@ article#fullArticle {
 }
 
 /* ============================================================
-   4. RESPONSIVE HEADER SAFETY
+   5. RESPONSIVE HEADER SAFETY
    ============================================================ */
 
 @media (max-width: 480px) {
