@@ -156,6 +156,14 @@ textarea {
   font-family: inherit;
 }
 
+/* Keep core content wrappers on Lumina baseline colors. */
+#contentArea,
+#categoryHead,
+.articleList {
+  background: var(--bg-page);
+  color: var(--text-primary);
+}
+
 /* Site-wide links. */
 a {
   color: var(--link);
@@ -380,7 +388,7 @@ article#fullArticle {
 }
 
 /* ============================================================
-   5. RESPONSIVE HEADER SAFETY
+  5. RESPONSIVE HEADER SAFETY
    ============================================================ */
 
 @media (max-width: 480px) {
