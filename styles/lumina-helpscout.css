@@ -7,12 +7,23 @@
    - Apply only the baseline Lumina surface, link, header, logo, and
      article reading styles.
    - Defer homepage cards, sidebar, footer, article ratings, related
-     articles, fonts, and custom JavaScript until their own pass.
+     articles, custom sans/mono fonts, and custom JavaScript until
+     their own pass.
 
    Companion: tokens.css
    ============================================================ */
 
 @import url("./tokens.css");
+
+/* Editorial New display face. The CSS is served from /dist, so this
+   relative path resolves back to the tracked font under /styles/fonts. */
+@font-face {
+  font-family: "Editorial New";
+  src: url("../styles/fonts/EditorialNew-Variable.ttf") format("truetype");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ============================================================
    1. BASE SURFACE + TYPE
@@ -136,6 +147,16 @@ a:focus {
 
 #docsSearch h1 {
   color: var(--text-primary);
+}
+
+/* Display headings across Help Scout page types. Font-only pass. */
+#docsSearch h1,
+#categoryHead h1,
+.category-list a.category h3,
+#fullArticle h1.title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: var(--tracking-normal);
 }
 
 /* Homepage and sidebar search fields. */
