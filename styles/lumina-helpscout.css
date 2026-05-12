@@ -726,6 +726,11 @@ article#fullArticle {
   margin: var(--space-12) 0;
 }
 
+#fullArticle img {
+  border: none !important;
+  box-shadow: none !important;
+}
+
 /* Override the inline-style rust on .contentWrapper a / #fullArticle a. */
 .contentWrapper a,
 #fullArticle a {
@@ -741,19 +746,9 @@ article#fullArticle {
   text-decoration-color: var(--accent);
 }
 
-/* Print button: top-right of article. */
+/* Print button removed. */
 .printArticle {
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: var(--fs-md);
-  padding: var(--space-2);
-}
-
-.printArticle:hover {
-  color: var(--text-primary);
+  display: none !important;
 }
 
 /* Article ratings widget. */
