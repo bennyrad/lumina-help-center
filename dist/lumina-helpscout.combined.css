@@ -327,6 +327,24 @@ a:focus {
   color: var(--link);
 }
 
+/* Homepage category tiles (Categories view only). */
+#contentArea > .category-list a.category,
+#contentArea > .category-list a.category:hover,
+#contentArea > .category-list a.category:focus {
+  background: var(--lumina-off-black);
+  border-color: var(--lumina-off-black);
+  color: var(--lumina-off-white);
+}
+
+#contentArea > .category-list a.category h3,
+#contentArea > .category-list a.category p,
+#contentArea > .category-list a.category .article-count,
+#contentArea > .category-list a.category:hover h3,
+#contentArea > .category-list a.category:hover p,
+#contentArea > .category-list a.category:hover .article-count {
+  color: var(--lumina-off-white);
+}
+
 /* ============================================================
    4. ARTICLE READABILITY
    ============================================================ */
