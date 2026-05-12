@@ -257,16 +257,23 @@ a:hover {
    whether Help Scout includes the .sm class or not. */
 #sidebar #searchBar,
 #sidebar #searchBar.sm {
+  display: flex;
+  align-items: stretch;
   max-width: none;
   height: 40px;
+  padding: 0;
   margin: 0 0 var(--space-8);
+  overflow: hidden;
 }
 
 #sidebar #searchBar input.search-query,
 #sidebar #searchBar.sm input.search-query {
+  flex: 1 1 auto;
+  min-width: 0;
   height: 100%;
   font-size: var(--fs-sm);
   padding: 0 var(--space-3);
+  margin: 0;
 }
 
 #sidebar #searchBar button[type="submit"],
@@ -275,6 +282,7 @@ a:hover {
   min-width: 40px !important;
   width: 40px;
   flex: 0 0 40px;
+  margin: 0 0 0 auto;
   padding: 0;
 }
 
