@@ -486,8 +486,8 @@ hr.sep {
   align-items: center;
   justify-content: center;
   gap: var(--space-3);
-  min-height: 132px;
-  padding: var(--space-8) var(--space-4);
+  min-height: 200px;
+  padding: var(--space-12) var(--space-6);
   border: 1px solid var(--border-subtle);
   text-decoration: none;
   color: var(--text-primary);
