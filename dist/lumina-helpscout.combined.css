@@ -39,8 +39,8 @@
   --lumina-fluro-green: #C7EA26;
 
   /* ----- Semantic assignments ----- */
-  --bg-page:            #FFFFFF;
-  --bg-elevated:        #FFFFFF;
+  --bg-page:            var(--lumina-off-white);
+  --bg-elevated:        var(--lumina-off-white);
   --bg-rail:            #FBFBF7;
   --bg-header:          var(--lumina-off-black);
   --bg-footer:          var(--lumina-off-black);
@@ -496,6 +496,12 @@ hr.sep {
 /* Keep category tile borders uniform across the full grid. */
 .category-list a.category:nth-child(-n+2) {
   border: 1px solid var(--lumina-off-white);
+}
+
+/* Hide the empty <p></p> Help Scout inserts inside each tile — it becomes
+   an unwanted flex item and creates a gap between the title and article count. */
+.category-list a.category p:empty {
+  display: none;
 }
 
 .category-list a.category h3 {

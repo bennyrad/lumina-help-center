@@ -387,6 +387,12 @@ hr.sep {
   border: 1px solid var(--lumina-off-white);
 }
 
+/* Hide the empty <p></p> Help Scout inserts inside each tile — it becomes
+   an unwanted flex item and creates a gap between the title and article count. */
+.category-list a.category p:empty {
+  display: none;
+}
+
 .category-list a.category h3 {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
