@@ -486,16 +486,15 @@ hr.sep {
   justify-content: space-between;
   gap: var(--space-6);
   padding: var(--space-8) 0;
-  border: 1px solid var(--lumina-off-white);
+  border-top: 1px solid var(--border-subtle);
   text-decoration: none;
-  background: var(--lumina-off-black);
-  color: var(--text-inverse);
+  color: var(--text-primary);
   transition: color var(--duration) var(--ease);
 }
 
-/* Keep category tile borders uniform across the full grid. */
+/* No top border on the visual top row of the grid (first two items). */
 .category-list a.category:nth-child(-n+2) {
-  border: 1px solid var(--lumina-off-white);
+  border-top: none;
 }
 
 /* Hide the empty <p></p> Help Scout inserts inside each tile — it becomes
@@ -510,12 +509,12 @@ hr.sep {
   font-weight: 400;
   line-height: var(--lh-snug);
   letter-spacing: var(--tracking-tight);
-  color: var(--text-inverse);
+  color: var(--text-primary);
   margin: 0;
 }
 
 .category-list a.category:hover h3 {
-  color: var(--text-inverse);
+  color: var(--link-hover);
 }
 
 .category-list a.category .article-count {
@@ -523,7 +522,7 @@ hr.sep {
   font-size: var(--fs-xs);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  color: var(--text-inverse);
+  color: var(--text-muted);
   margin: 0;
   white-space: nowrap;
 }
@@ -531,7 +530,7 @@ hr.sep {
 /* Override the inline-style rust on .category-list .category .article-count. */
 .category-list .category .article-count,
 .category-list .category:hover .article-count {
-  color: var(--text-inverse);
+  color: var(--text-muted);
 }
 
 /* ============================================================
@@ -1097,11 +1096,11 @@ aside#sidebar {
 
   /* Single column: every item except the first needs a top border. */
   .category-list a.category:nth-child(-n+2) {
-    border: 1px solid var(--lumina-off-white);
+    border-top: 1px solid var(--border-subtle);
   }
 
   .category-list a.category:first-child {
-    border: 1px solid var(--lumina-off-white);
+    border-top: none;
   }
 
   .category-list a.category {
