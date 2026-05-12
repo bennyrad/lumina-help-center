@@ -365,8 +365,8 @@ hr.sep {
   margin: 0 auto;
   padding: var(--space-12) var(--space-6) var(--space-24);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-4);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-8);
 }
 
 .category-list a.category {
@@ -375,12 +375,13 @@ hr.sep {
   align-items: center;
   justify-content: center;
   gap: var(--space-3);
-  min-height: 200px;
+  min-height: 160px;
   padding: var(--space-12) var(--space-6);
   border: 1px solid var(--border-subtle);
+  background: var(--lumina-off-black);
   text-decoration: none;
-  color: var(--text-primary);
-  transition: color var(--duration) var(--ease);
+  color: var(--lumina-off-white);
+  transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease);
 }
 
 /* Card grid uses a full border on every tile. */
