@@ -109,6 +109,10 @@ a:hover {
    More robust than space-between, which behaves unpredictably
    with the nav-collapse element Bootstrap may leave in the flow. */
 #mainNav .brand {
+  display: block;
+  width: 180px;
+  height: 28px;
+  background: url("https://cdn.jsdelivr.net/gh/bennyrad/lumina-help-center/assets/logo-offwhite_transparent-bg.png") left center / contain no-repeat;
   padding: 0;
   margin: 0 auto 0 0;
 }
@@ -122,9 +126,7 @@ a:hover {
 }
 
 #mainNav .brand img {
-  display: block;
-  max-height: 40px;
-  width: auto;
+  display: none;
 }
 
 #mainNav .nav-collapse {
