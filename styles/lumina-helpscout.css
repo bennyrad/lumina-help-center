@@ -177,7 +177,7 @@ a:hover {
 
 #docsSearch {
   background: var(--bg-page);
-  padding: var(--space-24) var(--space-6) var(--space-16);
+  padding: var(--space-16) var(--space-6) var(--space-12);
   text-align: center;
 }
 
@@ -195,7 +195,7 @@ a:hover {
 #searchBar {
   display: flex;
   align-items: stretch;
-  max-width: 640px;
+  max-width: 540px;
   margin: 0 auto;
   background: var(--bg-elevated);
   border: 1px solid var(--border-default);
@@ -233,7 +233,8 @@ a:hover {
   font-size: var(--fs-xs);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  padding: 0 var(--space-6);
+  padding: 0 var(--space-5);
+  min-width: 112px;
   border: none;
   cursor: pointer;
   transition: background-color var(--duration) var(--ease);
@@ -364,26 +365,27 @@ hr.sep {
   margin: 0 auto;
   padding: var(--space-12) var(--space-6) var(--space-24);
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: var(--space-12);
-  row-gap: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
 }
 
 .category-list a.category {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-6);
-  padding: var(--space-8) 0;
-  border-top: 1px solid var(--border-subtle);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: 132px;
+  padding: var(--space-8) var(--space-4);
+  border: 1px solid var(--border-subtle);
   text-decoration: none;
   color: var(--text-primary);
   transition: color var(--duration) var(--ease);
 }
 
-/* No top border on the visual top row of the grid (first two items). */
+/* Card grid uses a full border on every tile. */
 .category-list a.category:nth-child(-n+2) {
-  border-top: none;
+  border: 1px solid var(--border-subtle);
 }
 
 /* Hide the empty <p></p> Help Scout inserts inside each tile — it becomes
@@ -400,6 +402,7 @@ hr.sep {
   letter-spacing: var(--tracking-tight);
   color: var(--text-primary);
   margin: 0;
+  text-align: center;
 }
 
 .category-list a.category:hover h3 {
@@ -414,6 +417,7 @@ hr.sep {
   color: var(--text-muted);
   margin: 0;
   white-space: nowrap;
+  text-align: center;
 }
 
 /* Override the inline-style rust on .category-list .category .article-count. */
@@ -983,17 +987,18 @@ aside#sidebar {
     grid-template-columns: 1fr;
   }
 
-  /* Single column: every item except the first needs a top border. */
+  /* Single column: keep the same card border treatment. */
   .category-list a.category:nth-child(-n+2) {
-    border-top: 1px solid var(--border-subtle);
+    border: 1px solid var(--border-subtle);
   }
 
   .category-list a.category:first-child {
-    border-top: none;
+    border: 1px solid var(--border-subtle);
   }
 
   .category-list a.category {
-    padding: var(--space-6) 0;
+    min-height: 112px;
+    padding: var(--space-6) var(--space-4);
   }
 
   .category-list a.category h3 {
