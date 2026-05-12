@@ -648,15 +648,24 @@ hgroup#categoryHead {
 
 #categoryHead select#sortBy {
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  letter-spacing: var(--tracking-wide);
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tracking-normal);
   text-transform: uppercase;
-  color: var(--text-secondary);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
+  color: var(--text-primary) !important;
+  -webkit-text-fill-color: var(--text-primary);
+  opacity: 1;
+  background: var(--bg-page);
+  border: 1px solid var(--border-default);
   border-radius: 0;
-  padding: var(--space-2) var(--space-4);
+  width: min(100%, 320px);
+  min-height: 44px;
+  padding: 0 var(--space-8) 0 var(--space-4);
   cursor: pointer;
+}
+
+#categoryHead select#sortBy:focus {
+  outline: none;
+  border-color: var(--lumina-off-black);
 }
 
 ul.articleList {
@@ -1038,10 +1047,12 @@ aside#sidebar {
    ============================================================ */
 
 #contentArea > footer {
-  background: var(--bg-footer);
+  background: var(--bg-header);
   color: var(--text-inverse);
   padding: var(--space-8) var(--space-6);
-  margin: var(--space-24) calc(-1 * var(--space-6)) 0;
+  width: 100vw;
+  box-sizing: border-box;
+  margin: var(--space-24) calc(50% - 50vw) 0;
   text-align: center;
 }
 
