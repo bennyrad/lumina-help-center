@@ -12,23 +12,6 @@ This repo contains:
 
 ---
 
-## Repo structure
-lumina-help-center/
-├── README.md
-├── docs/
-│   ├── voice-and-tone.md       # The voice north star
-│   └── ia.md                   # Help Center information architecture
-├── prompts/
-│   └── faq-rewriter.md         # Reusable system prompt for content work
-├── styles/
-│   ├── tokens.css              # Brand variables (colors, typography, spacing)
-│   └── lumina-helpscout.css    # Help Scout Docs theme overrides
-├── beacon/
-│   └── config.js               # Beacon widget configuration (forthcoming)
-└── assets/
-└── fonts/                  # Self-hosted web fonts (Editorial New, Neue Montreal, DM Mono)
----
-
 ## Deployment
 
 ### CSS to Help Scout
@@ -69,37 +52,4 @@ Configure the custom domain in Help Scout at:
 ### Access restriction
 
 The Help Center is gated. Public access is restricted; the site is delivered to members through the Beacon widget embedded in the Lumina app and (selectively) the marketing site. See `beacon/config.js` for the embed configuration.
-
----
-
-## Content workflow
-
-For new or revised FAQ articles:
-
-1. Pull source from the Member-Facing FAQs spreadsheet (FAQs_Oct25 tab) or the Notion FAQ page.
-2. Open a new Claude conversation. Paste `prompts/faq-rewriter.md` as the first message.
-3. Paste the source entry. Claude returns a Lumina-compliant rewrite.
-4. Review the rewrite. Address any flagged structural issues in the `**Notes:**` block.
-5. Paste into a new Help Scout Docs article in the appropriate collection (see `docs/ia.md`).
-6. Cross-link related articles where applicable.
-
-Voice compliance: every article must conform to `docs/voice-and-tone.md`. The rewriter prompt enforces this automatically; manual edits should be checked against the same reference.
-
----
-
-## Status
-
-- [x] Voice and tone reference locked
-- [x] Information architecture defined
-- [x] Brand tokens and Help Scout CSS drafted
-- [ ] CSS deployed and validated against live site selectors
-- [ ] Fonts self-hosted and verified
-- [ ] Custom domain `help.lumina.inc` configured
-- [ ] FAQ content migrated from FAQs_Oct25 spreadsheet
-- [ ] Beacon configured with topic dropdown for bug intake
-- [ ] Notion bug-submit endpoint deprecated
-
----
-
-
 
