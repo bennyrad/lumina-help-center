@@ -197,6 +197,7 @@ a:hover {
   align-items: stretch;
   max-width: 540px;
   margin: 0 auto;
+  height: 56px;
   background: var(--bg-elevated);
   border: 1px solid var(--border-default);
   transition: border-color var(--duration) var(--ease);
@@ -210,7 +211,8 @@ a:hover {
   flex: 1;
   font-family: var(--font-sans);
   font-size: var(--fs-base);
-  padding: var(--space-3) var(--space-4);
+  height: 100%;
+  padding: 0 var(--space-4);
   border: none;
   background: transparent;
   color: var(--text-primary);
@@ -226,6 +228,8 @@ a:hover {
 #searchBar button[type="submit"] {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  height: 100%;
   gap: var(--space-2);
   background: var(--lumina-off-black);
   color: var(--text-inverse);
