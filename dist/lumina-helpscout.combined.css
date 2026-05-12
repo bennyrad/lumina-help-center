@@ -476,8 +476,8 @@ hr.sep {
   margin: 0 auto;
   padding: var(--space-12) var(--space-6) var(--space-24);
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-8);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
 }
 
 .category-list a.category {
@@ -486,8 +486,10 @@ hr.sep {
   align-items: center;
   justify-content: center;
   gap: var(--space-3);
-  min-height: 160px;
-  padding: var(--space-12) var(--space-6);
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 120px;
+  padding: var(--space-6) var(--space-8);
   border: 1px solid var(--border-subtle);
   background: var(--lumina-off-black);
   text-decoration: none;
@@ -512,13 +514,13 @@ hr.sep {
   font-weight: 400;
   line-height: var(--lh-snug);
   letter-spacing: var(--tracking-tight);
-  color: var(--text-primary);
+  color: var(--lumina-off-white);
   margin: 0;
   text-align: center;
 }
 
 .category-list a.category:hover h3 {
-  color: var(--link-hover);
+  color: var(--lumina-off-white);
 }
 
 .category-list a.category .article-count {
@@ -526,7 +528,8 @@ hr.sep {
   font-size: var(--fs-xs);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--lumina-off-white);
+  opacity: 0.78;
   margin: 0;
   white-space: nowrap;
   text-align: center;
@@ -535,7 +538,7 @@ hr.sep {
 /* Override the inline-style rust on .category-list .category .article-count. */
 .category-list .category .article-count,
 .category-list .category:hover .article-count {
-  color: var(--text-muted);
+  color: var(--lumina-off-white) !important;
 }
 
 /* ============================================================
