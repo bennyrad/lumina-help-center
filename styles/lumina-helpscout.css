@@ -456,7 +456,7 @@ hr.sep {
 }
 
 .category-list a.category:hover h3 {
-  color: var(--lumina-off-white);
+  color: var(--lumina-off-black);
 }
 
 .category-list a.category .article-count {
@@ -475,6 +475,15 @@ hr.sep {
 .category-list .category .article-count,
 .category-list .category:hover .article-count {
   color: var(--lumina-off-white) !important;
+}
+
+.category-list a.category:hover {
+  color: var(--lumina-off-black);
+}
+
+.category-list a.category:hover .article-count {
+  color: var(--lumina-off-black) !important;
+  opacity: 1;
 }
 
 /* ============================================================
