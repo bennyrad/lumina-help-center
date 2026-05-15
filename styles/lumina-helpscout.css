@@ -396,8 +396,11 @@ hr.sep {
    ============================================================ */
 
 /* Multi-collection wrapper (visible when logged in as admin).
-   Each collection gets a .collection-category section with an h2. */
+   Each collection gets a .collection-category section with an h2.
+   Must fill the full flex-column parent so inner margin:auto centering works. */
 .collection-category {
+  width: 100%;
+  align-self: stretch;
   margin: 0 0 var(--space-16);
 }
 
@@ -433,6 +436,7 @@ hr.sep {
 }
 
 .category-list {
+  width: 100%;
   max-width: 720px;
   margin: 0 auto;
   padding: 2rem 0 0;
