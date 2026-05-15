@@ -92,12 +92,10 @@ a:hover {
   margin: 0 auto 0 0;
 }
 
-/* Bootstrap shows .btn-navbar on small screens via @media; pin it
-   to display:none on desktop so it can never be a flex item there. */
-@media (min-width: 769px) {
-  #mainNav .btn.btn-navbar {
-    display: none;
-  }
+/* Hide the Bootstrap hamburger toggle at all widths — Contact is always
+   visible inline, so the collapse toggle is never needed. */
+#mainNav .btn.btn-navbar {
+  display: none !important;
 }
 
 #mainNav .brand img {
@@ -125,11 +123,11 @@ a:hover {
   border-radius: var(--radius-lg);
   color: var(--text-inverse);
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0;
   line-height: 1;
   text-decoration: none;
-  padding: 0.75rem 1rem;
+  padding: 0.8125rem 1.375rem;
 }
 
 #mainNav ul.nav li a:hover,
@@ -1119,6 +1117,22 @@ aside#sidebar {
    ============================================================ */
 
 @media (max-width: 768px) {
+  /* Force the Bootstrap nav-collapse to always show on mobile now
+     that the hamburger toggle is removed. */
+  #mainNav .nav-collapse,
+  #mainNav .nav-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Admin collection nav links are desktop-only — hide on mobile. */
+  #mainNav ul.nav li:has(b.caret) {
+    display: none;
+  }
+
+
   #docsSearch {
     padding: 2rem var(--space-4) 0.5rem;
   }
