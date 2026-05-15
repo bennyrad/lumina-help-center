@@ -36,8 +36,8 @@
   --lumina-fluro-green: #C7EA26;
 
   /* ----- Semantic assignments ----- */
-  --bg-page:            #FFFFFF;
-  --bg-elevated:        #FFFFFF;
+  --bg-page:            #F8F7F4;
+  --bg-elevated:        #F8F7F4;
   --bg-rail:            #FBFBF7;
   --bg-header:          var(--lumina-off-black);
   --bg-footer:          var(--lumina-off-black);
@@ -88,6 +88,7 @@
   --space-2:  0.5rem;
   --space-3:  0.75rem;
   --space-4:  1rem;
+  --space-5:  1.25rem;
   --space-6:  1.5rem;
   --space-8:  2rem;
   --space-12: 3rem;
@@ -102,6 +103,7 @@
   --radius-none: 0;
   --radius-sm:   2px;
   --radius-md:   4px;
+  --radius-lg:   10px;
 
   /* ----- Motion ----- */
   --ease:        cubic-bezier(0.2, 0.6, 0.2, 1);
