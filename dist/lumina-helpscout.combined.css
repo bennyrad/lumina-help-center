@@ -546,6 +546,8 @@ hr.sep {
 /* When inside a collection wrapper, remove the top padding
    since the h2 label already provides spacing. */
 .collection-category .category-list {
+  margin-left: auto !important;
+  margin-right: auto !important;
   padding-top: 0;
 }
 
