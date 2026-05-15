@@ -39,8 +39,8 @@
   --lumina-fluro-green: #C7EA26;
 
   /* ----- Semantic assignments ----- */
-  --bg-page:            var(--lumina-off-white);
-  --bg-elevated:        var(--lumina-off-white);
+  --bg-page:            #F8F7F4;
+  --bg-elevated:        #F8F7F4;
   --bg-rail:            #FBFBF7;
   --bg-header:          var(--lumina-off-black);
   --bg-footer:          var(--lumina-off-black);
@@ -719,7 +719,7 @@ hr.sep {
    not inside Help Scout's default white card. */
 #main-content .contentWrapper,
 #main-content .contentWrapper.withRelated {
-  max-width: 720px;
+  max-width: none;
   padding: 0 !important;
   margin: 0 !important;
   border: none !important;
@@ -887,7 +887,6 @@ article#fullArticle {
   line-height: 1.55;
   color: var(--text-primary);
   margin: 0 0 0.875rem;
-  max-width: 42rem;
 }
 
 #fullArticle ul,
@@ -1042,7 +1041,6 @@ section.articleFoot {
 
 /* Related articles section. */
 section.related {
-  max-width: 42rem;
   margin: 2.75rem 0 0;
   padding: 0;
   border: none !important;

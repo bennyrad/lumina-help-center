@@ -36,8 +36,8 @@
   --lumina-fluro-green: #C7EA26;
 
   /* ----- Semantic assignments ----- */
-  --bg-page:            var(--lumina-off-white);
-  --bg-elevated:        var(--lumina-off-white);
+  --bg-page:            #F8F7F4;
+  --bg-elevated:        #F8F7F4;
   --bg-rail:            #FBFBF7;
   --bg-header:          var(--lumina-off-black);
   --bg-footer:          var(--lumina-off-black);
