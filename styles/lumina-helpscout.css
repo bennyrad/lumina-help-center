@@ -138,6 +138,11 @@ a:hover {
   color: var(--text-inverse);
 }
 
+/* Logged-in admin nav: hide Bootstrap carets on collection links. */
+#mainNav ul.nav li a b.caret {
+  display: none;
+}
+
 /* Mobile nav toggle. Hidden by default; Bootstrap shows it on small screens. */
 #mainNav .btn.btn-navbar {
   background: var(--lumina-off-black);
@@ -389,6 +394,43 @@ hr.sep {
 /* ============================================================
    6. HOMEPAGE: CATEGORY LIST (.category-list, a.category)
    ============================================================ */
+
+/* Multi-collection wrapper (visible when logged in as admin).
+   Each collection gets a .collection-category section with an h2. */
+.collection-category {
+  margin: 0 0 var(--space-16);
+}
+
+.collection-category:last-child {
+  margin-bottom: 0;
+}
+
+/* Collection heading — style as a small eyebrow label, not a giant link. */
+.collection-category h2 {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: var(--space-8) auto var(--space-2);
+  max-width: 720px;
+}
+
+.collection-category h2 a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.collection-category h2 a:hover {
+  color: var(--text-primary);
+}
+
+/* When inside a collection wrapper, remove the top padding
+   since the h2 label already provides spacing. */
+.collection-category .category-list {
+  padding-top: 0;
+}
 
 .category-list {
   max-width: 720px;
